@@ -185,6 +185,7 @@ end
 
 function Hedg.OnDraw()
     if not Menu.IsEnabled( Hedg.optionEnable) or not Heroes.GetLocal() then return end
+    if NPC.GetUnitName( Heroes.GetLocal() ) ~= "npc_dota_hero_bristleback" then return end
     if isActived then
         Renderer.SetDrawColor( 90, 255, 100)
         local Viscous = ( PlayerData.isAghanim and Menu.IsEnabled( Hedg.onViscous ) and 'ON' or not PlayerData.isAghanim and 'Нет Аганима' or 'OFF' )
