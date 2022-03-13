@@ -16,6 +16,7 @@ local function _y( y )
 end
 
 
+-- 228 print Не брошу
 -- local function print( ... )
 --     local t = { ... }
 --     for i = 1, #t do 
@@ -74,9 +75,9 @@ local spell = {
 
 
 function Hedg.init()
-    if Engine.IsInGame() then --только если мы в игре
-        if NPC.GetUnitName( Heroes.GetLocal() ) ~= "npc_dota_hero_bristleback" then return end
-        
+    PlayerData.Hero = false
+    if Engine.IsInGame() then --только если мы в игре      
+        if NPC.GetUnitName( Heroes.GetLocal() ) ~= "npc_dota_hero_bristleback" then return end      
         PlayerData.Hero = Heroes.GetLocal(); -- героя обычно в игре не меняют.
         PlayerData.Team = Entity.GetTeamNum( PlayerData.Hero );
 
@@ -103,7 +104,7 @@ end
 
 -- Проверяем возможность нажатия на кнопку
 local function isBadEvent( ) 
-    local player = PlayerData.Hero
+    local player = PlayerData.Hero 
     for k, mod in pairs( tBlockSpay ) do
         if NPC.HasState( player, mod ) then 
             return true 
@@ -184,8 +185,9 @@ end
 
 
 function Hedg.OnDraw()
+    if not PlayerData.Hero then return end 
     if not Menu.IsEnabled( Hedg.optionEnable) or not Heroes.GetLocal() then return end
-    if NPC.GetUnitName( Heroes.GetLocal() ) ~= "npc_dota_hero_bristleback" then return end
+
     if isActived then
         Renderer.SetDrawColor( 90, 255, 100)
         local Viscous = ( PlayerData.isAghanim and Menu.IsEnabled( Hedg.onViscous ) and 'ON' or not PlayerData.isAghanim and 'Нет Аганима' or 'OFF' )
