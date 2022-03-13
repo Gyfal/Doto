@@ -76,8 +76,7 @@ local spell = {
 
 function Hedg.init()
     PlayerData.Hero = false
-    if Engine.IsInGame() then --только если мы в игре      
-        if NPC.GetUnitName( Heroes.GetLocal() ) ~= "npc_dota_hero_bristleback" then return end      
+    if Engine.IsInGame() then --только если мы в игре            
         PlayerData.Hero = Heroes.GetLocal(); -- героя обычно в игре не меняют.
         PlayerData.Team = Entity.GetTeamNum( PlayerData.Hero );
 
@@ -126,7 +125,11 @@ end
 
 function Hedg.OnUpdate()
     if not PlayerData.Hero or not Menu.IsEnabled( Hedg.optionEnable ) then return end
-    
+    if NPC.GetUnitName( Heroes.GetLocal() ) ~= "npc_dota_hero_bristleback" then 
+        PlayerData.Hero = false
+        return 
+    end
+
     if Menu.IsKeyDownOnce( Hedg.toggleKey ) then
         isActived = not isActived
     end
