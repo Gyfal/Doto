@@ -37,8 +37,8 @@ function TurboCourier.init()
         if entity and Entity.IsSameTeam( hero, entity ) and NPC.GetUnitName(entity) == "npc_dota_courier" then
             if player == Entity.GetOwner( entity ) then 
                 PLAYER_DATA.courier = entity
+                break
             end
-            break
         end
     end
 
