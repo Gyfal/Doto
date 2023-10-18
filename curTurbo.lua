@@ -33,9 +33,12 @@ function TurboCourier.init()
         return
     end
 
+    local hero = Heroes.GetLocal()
+    local player = Players.GetLocal()
+
     for idx, entity in pairs( Couriers.GetAll() ) do
-        if entity and Entity.IsSameTeam( hero, entity ) and NPC.GetUnitName(entity) == "npc_dota_courier" then
-            if player == Entity.GetOwner( entity ) then 
+        if entity and IsEntity( entity ) and Entity.IsSameTeam( hero, entity ) and NPC.GetUnitName( entity ) == "npc_dota_courier" then
+            if player == Entity.GetOwner( entity ) then
                 PLAYER_DATA.courier = entity
                 break
             end
@@ -46,7 +49,7 @@ function TurboCourier.init()
 end
 
 function TurboCourier.OnGameStart()
-    TurboCourier.init()    
+    TurboCourier.init()
 end;
 
 TurboCourier.init()
