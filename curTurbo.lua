@@ -18,15 +18,6 @@ local SUCCESS_ITEMS = {
     [ "item_gem" ] = true
 }
 
--- 228 print Не брошу
-local function print( ... )
-    local t = { ... }
-    for i = 1, #t do 
-        t[i] = tostring( t[i])
-    end
-    local s = table.concat( t, "\t")
-    Log.Write ( s )
-end 
 
 -- Локализация --
 local GetAbsOrigin = Entity.GetAbsOrigin
@@ -48,9 +39,7 @@ function TurboCourier.init()
 
     for idx, entity in pairs( Couriers.GetAll() ) do
         if entity and IsEntity( entity ) and Entity.IsSameTeam( hero, entity ) and NPC.GetUnitName( entity ) == "npc_dota_courier" then
-            print( 1 )
             if player == Entity.GetOwner( entity ) then
-                print( 2 )
                 PLAYER_DATA.courier = entity
                 break
             end
